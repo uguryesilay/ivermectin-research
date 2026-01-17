@@ -48,7 +48,8 @@ export default function HomePage() {
                 src="/images/ivermectin-homepage-hero-banner.webp"
                 alt="Ivermectin medical research"
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
+                quality={85}
                 className="object-cover rounded-lg shadow-2xl"
                 priority
               />
