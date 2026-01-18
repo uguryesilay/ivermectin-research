@@ -34,5 +34,13 @@ function getMDXData(dir: string) {
 }
 
 export function getBlogPosts() {
-    return getMDXData(path.join(process.cwd(), "content"))
+    const allPosts = getMDXData(path.join(process.cwd(), "content"))
+    const today = new Date().toISOString().split('T')[0] // YYYY-MM-DD format
+
+    // Filter: only include posts where publishedAt <= today
+    // Sort: newest first (reverse chronological order)
+    return allPosts
+        .filter(post => post.metadata.publishedAt <= today)
+        .sort((a, b) => b.metadata.publishedAt.localeCompare(a.metadata.publishedAt))
 }
+

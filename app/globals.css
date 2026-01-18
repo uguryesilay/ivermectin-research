@@ -77,12 +77,27 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
+  }
+
+  /* Scroll margin for anchor links with sticky header */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    scroll-margin-top: 80px;
   }
 
   /* Enhanced prose styling for academic content */

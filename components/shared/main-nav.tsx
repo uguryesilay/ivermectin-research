@@ -6,90 +6,81 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-
-const articles = [
-    { href: "/ivermectin-comprehensive-guide", label: "Comprehensive Guide" },
-    { href: "/ivermectin-uses", label: "Medical Uses" },
-    { href: "/ivermectin-dosage-guide", label: "Dosage Guide" },
-    { href: "/ivermectin-side-effects", label: "Side Effects" },
-]
+import { CATEGORIES } from "@/lib/categories"
 
 export function MainNav() {
     const pathname = usePathname()
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
-    // Close mobile menu when route changes
     React.useEffect(() => {
         setMobileMenuOpen(false)
     }, [pathname])
 
     return (
         <>
-            {/* Desktop Navigation */}
-            <div className="mr-4 hidden md:flex">
-                <nav className="flex items-center space-x-6 text-sm font-medium">
-                    {articles.map((article) => (
-                        <Link
-                            key={article.href}
-                            href={article.href}
-                            className={cn(
-                                "transition-colors hover:text-foreground/80 whitespace-nowrap",
-                                pathname === article.href ? "text-foreground" : "text-foreground/60"
-                            )}
-                        >
-                            {article.label}
-                        </Link>
-                    ))}
+            {/* Desktop Navigation - Simple Links */}
+            <nav className="hidden lg:flex items-center gap-6">
+                {CATEGORIES.map((category) => (
                     <Link
-                        href="/about"
+                        key={category.slug}
+                        href={`/${category.slug}`}
                         className={cn(
-                            "transition-colors hover:text-foreground/80",
-                            pathname === "/about" ? "text-foreground" : "text-foreground/60"
+                            "text-sm transition-colors",
+                            pathname === `/${category.slug}`
+                                ? "text-blue-600 dark:text-blue-400 font-medium"
+                                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                         )}
                     >
-                        About
+                        {category.title.split(' & ')[0]}
                     </Link>
-                </nav>
-            </div>
+                ))}
+                <Link
+                    href="/about"
+                    className={cn(
+                        "text-sm transition-colors",
+                        pathname === "/about"
+                            ? "text-blue-600 dark:text-blue-400 font-medium"
+                            : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                    )}
+                >
+                    About
+                </Link>
+            </nav>
 
             {/* Mobile Menu Button */}
             <button
-                className="md:hidden p-2 hover:bg-accent rounded-md transition-colors"
+                className="lg:hidden p-2 text-gray-600 dark:text-gray-400"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle menu"
             >
-                {mobileMenuOpen ? (
-                    <X className="h-5 w-5" />
-                ) : (
-                    <Menu className="h-5 w-5" />
-                )}
+                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
 
-            {/* Mobile Menu Dropdown */}
+            {/* Mobile Menu */}
             {mobileMenuOpen && (
-                <div className="absolute top-14 left-0 right-0 bg-background border-b shadow-lg md:hidden z-50">
-                    <nav className="container max-w-5xl mx-auto px-4 py-4 flex flex-col space-y-3">
-                        {articles.map((article) => (
+                <div className="fixed inset-x-0 top-14 bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 lg:hidden z-50">
+                    <nav className="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-1">
+                        {CATEGORIES.map((category) => (
                             <Link
-                                key={article.href}
-                                href={article.href}
+                                key={category.slug}
+                                href={`/${category.slug}`}
                                 className={cn(
-                                    "px-4 py-2 rounded-md transition-colors hover:bg-accent",
-                                    pathname === article.href
-                                        ? "bg-accent text-foreground font-medium"
-                                        : "text-foreground/70"
+                                    "px-3 py-2 text-sm rounded",
+                                    pathname === `/${category.slug}`
+                                        ? "bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium"
+                                        : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900"
                                 )}
                             >
-                                {article.label}
+                                {category.title}
                             </Link>
                         ))}
                         <Link
                             href="/about"
                             className={cn(
-                                "px-4 py-2 rounded-md transition-colors hover:bg-accent",
+                                "px-3 py-2 text-sm rounded",
                                 pathname === "/about"
-                                    ? "bg-accent text-foreground font-medium"
-                                    : "text-foreground/70"
+                                    ? "bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium"
+                                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900"
                             )}
                         >
                             About

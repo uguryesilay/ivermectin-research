@@ -3,3 +3,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://ivermectintablets2026.com/sitemap.xml
+
+# RSS Feed
+# https://ivermectintablets2026.com/feed.xml
