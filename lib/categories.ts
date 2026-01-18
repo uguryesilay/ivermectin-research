@@ -42,7 +42,6 @@ export const CATEGORIES: Category[] = [
 // This avoids needing to update 50 MDX files manually
 export const ARTICLE_CATEGORY_MAP: Record<string, string> = {
     // Medical Uses
-    'ivermectin-uses': 'medical-uses',
     'ivermectin-for-scabies': 'medical-uses',
     'ivermectin-for-parasites': 'medical-uses',
     'ivermectin-for-skin-conditions': 'medical-uses',
@@ -51,7 +50,6 @@ export const ARTICLE_CATEGORY_MAP: Record<string, string> = {
     'ivermectin-for-bed-bugs': 'medical-uses',
     'ivermectin-for-dogs': 'medical-uses', // If relevant to human context in article
     'what-is-ivermectin-used-for': 'medical-uses',
-    'ivermectin-comprehensive-guide': 'medical-uses', // Flagship
     'ivermectin-for-inflammation': 'medical-uses',
     'ivermectin-for-arthritis': 'medical-uses',
     'ivermectin-for-lyme-disease': 'medical-uses',
@@ -108,6 +106,8 @@ export const ARTICLE_CATEGORY_MAP: Record<string, string> = {
     'anti-parasitic-medications-for-humans': 'research-mechanism',
     'deworming-medicine-for-humans': 'research-mechanism',
     'ivermectin-faq': 'research-mechanism',
+    'ivermectin-comprehensive-guide': 'research-mechanism', // Flagship
+    'ivermectin-uses': 'research-mechanism',
 }
 
 export function getCategoryBySlug(slug: string): Category | undefined {
