@@ -22,7 +22,7 @@ function slugify(text: string): string {
 const components = {
     img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
         <Image
-            src={props.src || ''}
+            src={String(props.src || '')}
             alt={props.alt || 'Ivermectin medical illustration'}
             width={800}
             height={450}
