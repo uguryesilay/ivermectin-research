@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://ivermectintablets2026.com'),
   title: {
-    default: 'Ivermectin Research | Evidence-Based Medical Information',
-    template: '%s | Ivermectin Research'
+    default: 'Ivermectin Research Hub | Evidence-Based Medical Info',
+    template: '%s'
   },
   alternates: {
     canonical: './',
