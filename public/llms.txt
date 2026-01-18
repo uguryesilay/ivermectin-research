@@ -1,10 +1,31 @@
-User-agent: *
-Disallow:
+# Ivermectin Research
 
-# Sitemaps
-Sitemap: https://ivermectintablets2026.com/sitemap.xml
+> Evidence-based medical information on ivermectin research and applications
 
-# Content
-https://ivermectintablets2026.com/ivermectin-comprehensive-guide
-https://ivermectintablets2026.com/ivermectin-dosage-guide
-https://ivermectintablets2026.com/ivermectin-side-effects
+## About
+
+Ivermectin Research provides comprehensive, peer-reviewed information about ivermectin, an FDA-approved antiparasitic medication. Our content covers medical uses, dosage guidelines, safety information, and the latest clinical research.
+
+## Topics Covered
+
+- Medical Uses & Applications
+- Dosage & Administration
+- Safety & Side Effects
+- Research & Mechanism of Action
+- Buying Guide & Legal Information
+
+## Key Resources
+
+- Homepage: https://ivermectintablets2026.com
+- Comprehensive Guide: https://ivermectintablets2026.com/research-mechanism/ivermectin-comprehensive-guide
+- Dosage Guide: https://ivermectintablets2026.com/dosage-administration/ivermectin-dosage-guide
+- Side Effects: https://ivermectintablets2026.com/safety-side-effects/ivermectin-side-effects
+- How It Works: https://ivermectintablets2026.com/research-mechanism/how-ivermectin-works-mechanism-of-action-explained
+
+## Sitemap
+
+https://ivermectintablets2026.com/sitemap.xml
+
+## Contact
+
+For medical questions, consult a healthcare provider. For content inquiries, visit our About page.
