@@ -1,22 +1,20 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-// Article slug to category mapping
+// Article slug to category mapping - matches actual MDX filenames
 const ARTICLE_CATEGORIES: Record<string, string> = {
     // Medical Uses
     'ivermectin-for-parasites-types-treated-and-effectiveness': 'medical-uses',
     'ivermectin-for-scabies-treatment-protocol-and-success-rates': 'medical-uses',
     'ivermectin-for-lyme-disease-treatment-protocol-evidence': 'medical-uses',
-    'ivermectin-for-pinworms-effectiveness-and-protocol': 'medical-uses',
-    'ivermectin-for-skin-conditions-rosacea-and-acne-treatment': 'medical-uses',
+    'ivermectin-for-pinworms-effectiveness-and-alternatives': 'medical-uses',
+    'ivermectin-for-skin-conditions-rosacea-and-dermatological-uses': 'medical-uses',
     'ivermectin-for-inflammation-research-anti-inflammatory-effects': 'medical-uses',
-    'ivermectin-for-arthritis-evidence-protocols-alternatives': 'medical-uses',
-    'ivermectin-for-diabetes-research-and-evidence-2026': 'medical-uses',
+    'ivermectin-for-arthritis-evidence-protocols-user-experiences': 'medical-uses',
+    'ivermectin-for-diabetes-research-and-evidence': 'medical-uses',
     'what-is-ivermectin-used-for-fda-approved-and-off-label-uses': 'medical-uses',
     'tapeworm-treatment-does-ivermectin-work': 'medical-uses',
-    'anti-parasitic-medications-for-humans-complete-guide': 'medical-uses',
     'best-human-dewormer-options-ivermectin-vs-alternatives': 'medical-uses',
-    'deworming-medicine-for-humans-options-and-protocols': 'medical-uses',
 
     // Dosage & Administration
     'ivermectin-dosage-for-humans-complete-guide-by-weight-and-condition': 'dosage-administration',
@@ -24,7 +22,7 @@ const ARTICLE_CATEGORIES: Record<string, string> = {
     'how-to-take-ivermectin-timing-food-interactions-best-practices': 'dosage-administration',
     'ivermectin-for-kids-pediatric-safety-and-dosing': 'dosage-administration',
     'ivermectin-tablets-vs-paste-vs-liquid-which-form-to-choose': 'dosage-administration',
-    'ivermectin-paste-dosage-for-humans-conversion-guide': 'dosage-administration',
+    'ivermectin-paste-dosage-for-humans-converting-horse-paste-safely': 'dosage-administration',
     'liquid-ivermectin-dosage-for-humans-injectable-vs-oral-solutions': 'dosage-administration',
     'oral-ivermectin-vs-topical-choosing-the-right-form': 'dosage-administration',
     'ivermectin-dosage-for-covid-clinical-trial-protocols': 'dosage-administration',
@@ -34,12 +32,14 @@ const ARTICLE_CATEGORIES: Record<string, string> = {
     'ivermectin-side-effects-complete-safety-guide': 'safety-side-effects',
     'is-ivermectin-safe-for-humans-fda-status-and-clinical-evidence': 'safety-side-effects',
     'ivermectin-drug-interactions-what-you-cannot-take-together': 'safety-side-effects',
-    'ivermectin-overdose-symptoms-treatment-safe-dosing': 'safety-side-effects',
+    'ivermectin-overdose-symptoms-treatment-safe-limits': 'safety-side-effects',
     'ivermectin-safety-in-pregnancy-and-breastfeeding': 'safety-side-effects',
     'how-long-does-ivermectin-stay-in-your-system': 'safety-side-effects',
     'horse-ivermectin-for-humans-safety-guide-and-conversion': 'safety-side-effects',
     'can-humans-take-dog-dewormer-safety-analysis': 'safety-side-effects',
     'ivermectin-side-effects': 'safety-side-effects',
+    'ivermectin-ingredients-whats-in-the-tablets': 'safety-side-effects',
+    'ivermectin-shelf-life-storage-expiration-viability': 'safety-side-effects',
 
     // Research & Mechanism
     'how-ivermectin-works-mechanism-of-action-explained': 'research-mechanism',
@@ -48,21 +48,21 @@ const ARTICLE_CATEGORIES: Record<string, string> = {
     'ivermectin-faq-50-common-questions-answered': 'research-mechanism',
     'ivermectin-comprehensive-guide': 'research-mechanism',
     'ivermectin-uses': 'research-mechanism',
+    'anti-parasitic-medications-for-humans-complete-guide': 'research-mechanism',
+    'deworming-medicine-for-humans-options-and-protocols': 'research-mechanism',
+    'ivermectin-and-fenbendazole-complete-combination-protocol': 'research-mechanism',
+    'ivermectin-vs-fenbendazole-which-dewormer-is-better': 'research-mechanism',
 
     // Buying Guide
     'where-to-buy-ivermectin-for-humans-legal-options-in-2026': 'buying-guide',
     'how-to-get-ivermectin-prescription-and-access-guide': 'buying-guide',
     'buy-ivermectin-online-verified-pharmacies-vs-scam-sites': 'buying-guide',
-    'ivermectin-over-the-counter-states-where-available': 'buying-guide',
-    'ivermectin-near-me-finding-local-pharmacies-and-clinics': 'buying-guide',
-    'ivermectin-price-guide-cost-comparison-by-source': 'buying-guide',
+    'ivermectin-over-the-counter-states-where-its-available-without-prescription': 'buying-guide',
+    'ivermectin-near-me-finding-local-pharmacies-that-stock-it': 'buying-guide',
+    'ivermectin-price-guide-cost-comparison-by-form-and-pharmacy-2026': 'buying-guide',
     'ivermectin-brand-names-generic-vs-branded-products': 'buying-guide',
     'stromectol-brand-ivermectin-complete-guide-and-comparison': 'buying-guide',
     'durvet-ivermectin-guide-paste-injectable-tablet-forms': 'buying-guide',
-    'ivermectin-ingredients-whats-in-the-tablet': 'buying-guide',
-    'ivermectin-shelf-life-storage-expiration-guidelines': 'buying-guide',
-    'ivermectin-and-fenbendazole-complete-combination-protocol': 'buying-guide',
-    'ivermectin-vs-fenbendazole-which-dewormer-is-better': 'buying-guide',
     'parapurge-review-ivermectin-fenbendazole-supplement-analysis': 'buying-guide',
     'parasite-cleanse-supplements-ivermectin-and-natural-options': 'buying-guide',
     'over-the-counter-parasite-medication-whats-available': 'buying-guide',
