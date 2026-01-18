@@ -1,0 +1,10 @@
+User-agent: *
+Disallow:
+
+# Sitemaps
+Sitemap: https://ivermectintablets2026.com/sitemap.xml
+
+# Content
+https://ivermectintablets2026.com/ivermectin-comprehensive-guide
+https://ivermectintablets2026.com/ivermectin-dosage-guide
+https://ivermectintablets2026.com/ivermectin-side-effects

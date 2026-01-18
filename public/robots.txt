@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://ivermectintablets2026.com/sitemap.xml

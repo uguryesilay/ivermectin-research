@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     default: 'Ivermectin Research | Evidence-Based Medical Information',
     template: '%s | Ivermectin Research'
   },
+  alternates: {
+    canonical: './',
+  },
   description: 'Comprehensive, evidence-based information on ivermectin. Expert insights on uses, dosage, safety, and the latest research from peer-reviewed medical studies.',
   keywords: ['ivermectin', 'ivermectin research', 'medical information', 'antiparasitic medication', 'evidence-based medicine', 'clinical studies', 'FDA approved uses'],
   authors: [{ name: 'Dr. Sarah Chen, MD' }],

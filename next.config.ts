@@ -42,6 +42,24 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  // Redirects for broken links and 404s
+  async redirects() {
+    return [
+      {
+        source: '/blog/how-to-take-ivermectin',
+        destination: '/how-to-take-ivermectin-timing-food-interactions-best-practices',
+        permanent: true,
+      },
+      {
+        source: '/blog/ivermectin-cancer-research',
+        destination: '/ivermectin-for-inflammation-research-anti-inflammatory-effects',
+        permanent: true,
+      },
+      // Redirect 'www' to non-www (handled by Vercel usually, but good practice if self-hosting)
+      // Note: Vercel handles domain redirects at the edge, so we focus on path redirects here.
+    ];
+  },
 };
 
 export default nextConfig;
