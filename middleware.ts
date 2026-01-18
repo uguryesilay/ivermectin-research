@@ -109,6 +109,11 @@ export function middleware(request: NextRequest) {
             return NextResponse.next()
         }
 
+        // Redirect /about to homepage
+        if (slug === 'about') {
+            return NextResponse.redirect(new URL('/', request.url), 301)
+        }
+
         // Check if it's an article that needs redirect
         const category = ARTICLE_CATEGORIES[slug]
         if (category) {
