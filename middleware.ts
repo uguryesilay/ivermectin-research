@@ -1,6 +1,23 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
+// Legacy URL redirects - OLD wrong URLs to NEW correct URLs
+const LEGACY_REDIRECTS: Record<string, string> = {
+    // Wrong category + wrong slug
+    '/buying-guide/ivermectin-and-fenbendazole-complete-combination-protocol': '/research-mechanism/ivermectin-and-fenbendazole-complete-combination-protocol',
+    '/buying-guide/ivermectin-ingredients-whats-in-the-tablet': '/safety-side-effects/ivermectin-ingredients-whats-in-the-tablets',
+    '/buying-guide/ivermectin-shelf-life-storage-expiration-guidelines': '/safety-side-effects/ivermectin-shelf-life-storage-expiration-viability',
+    '/medical-uses/anti-parasitic-medications-for-humans-complete-guide': '/research-mechanism/anti-parasitic-medications-for-humans-complete-guide',
+
+    // Wrong slug (same category)
+    '/buying-guide/ivermectin-near-me-finding-local-pharmacies-and-clinics': '/buying-guide/ivermectin-near-me-finding-local-pharmacies-that-stock-it',
+    '/buying-guide/ivermectin-over-the-counter-states-where-available': '/buying-guide/ivermectin-over-the-counter-states-where-its-available-without-prescription',
+    '/medical-uses/ivermectin-for-diabetes-research-and-evidence-2026': '/medical-uses/ivermectin-for-diabetes-research-and-evidence',
+    '/medical-uses/ivermectin-for-pinworms-effectiveness-and-protocol': '/medical-uses/ivermectin-for-pinworms-effectiveness-and-alternatives',
+    '/medical-uses/ivermectin-for-skin-conditions-rosacea-and-acne-treatment': '/medical-uses/ivermectin-for-skin-conditions-rosacea-and-dermatological-uses',
+    '/safety-side-effects/ivermectin-overdose-symptoms-treatment-safe-dosing': '/safety-side-effects/ivermectin-overdose-symptoms-treatment-safe-limits',
+}
+
 // Article slug to category mapping - matches actual MDX filenames
 const ARTICLE_CATEGORIES: Record<string, string> = {
     // Medical Uses
@@ -95,6 +112,12 @@ export function middleware(request: NextRequest) {
     // Skip static paths
     if (STATIC_PATHS.some(path => pathname.startsWith(`/${path}`))) {
         return NextResponse.next()
+    }
+
+    // Check for legacy URL redirects FIRST
+    if (LEGACY_REDIRECTS[pathname]) {
+        const newUrl = new URL(LEGACY_REDIRECTS[pathname], request.url)
+        return NextResponse.redirect(newUrl, 301)
     }
 
     // Get the first path segment
